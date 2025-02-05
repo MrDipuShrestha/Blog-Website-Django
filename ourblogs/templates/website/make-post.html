@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+<header class="masthead" style="background-image: url('{% static 'img/edit-bg.jpg' %}')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="page-heading">
+                     {% if is_edit %}
+                    <h1>Edit Post</h1>
+                    {% else %}
+                    <h1>New Post</h1> 
+                    {% endif %}
+                    <span class="subheading">You're going to make a great blog post!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            {% if is_edit %}
+            <form action="{% url 'edit-post' post_id=post.id %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form> 
+
+            {% else %}
+            <form action="{% url 'make-post' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            {% endif %} 
+        </div>
+    </div>
+</div>
+
+{% endblock %}
