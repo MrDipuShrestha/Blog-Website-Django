@@ -29,10 +29,12 @@
             {{post.body | safe}}
           </p>
            <hr>
+           {% if request.user.is_superuser %}
            <div class="clearfix">
-          <a class="btn btn-primary float-right" href="{% url 'edit-post' post_id=post.id %}">Edit Post</a>
-        </div>
+            <a class="btn btn-primary float-right" href="{% url 'edit-post' post_id=post.id %}">Edit Post</a>
           </div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </article>

@@ -30,4 +30,7 @@ urlpatterns = [
     path('edit-post/<int:post_id>', views.edit_post, name='edit-post'),
     path('delete-post/<int:blog_id>', views.delete_post, name='delete-post'),
     path('post/<int:blog_id>', views.post, name='post'),
+    path('register', views.register, name='register'),
+    path('login', views.login_user, name='login'),
+    path('logout', views.user_logout, name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
