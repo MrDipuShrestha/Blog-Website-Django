@@ -34,10 +34,35 @@
             <a class="btn btn-primary float-right" href="{% url 'edit-post' post_id=post.id %}">Edit Post</a>
           </div>
           {% endif %}
+          
+          <form action="{% url 'post' blog_id=post.id %}" method="POST">
+            {% csrf_token %}
+             {{form.as_p}}
+             <button class="btn btn-primary" type="submit">Submit Comments</button>
+          </form>
+
+          <div class="col-lg-8 col-md-10 mx-auto comment">
+                    <ul class="commentList">
+                        {% for comment in comments %}
+                        <li>
+                            <div class="commenterImage">
+                                <img src="{{comment.user.email}}"/>
+                            </div>
+                            <div class="commentText">
+                                <p>{{comment.comment}}</p>
+                                <span class="date sub-text">{{comment.user.name}}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+          
         </div>
       </div>
     </div>
   </article>
+
+
 
   <hr>
   {% endblock %}

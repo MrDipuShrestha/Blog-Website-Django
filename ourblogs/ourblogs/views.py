@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login , logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import CreateBlogForm, CreateUserForm, LoginForm
-from .models import Blogpost
+from .forms import CreateBlogForm, CreateUserForm, LoginForm, CommentForm
+from .models import Blogpost, Comment
 
 def home(request):
     blogs = Blogpost.objects.all()
@@ -46,7 +46,18 @@ def delete_post(request, blog_id):
 
 def post(request, blog_id):
     post = get_object_or_404(Blogpost, pk=blog_id)
-    return render(request, 'website/post.html', {'post': post})
+    comments = Comment.objects.all()
+    form = CommentForm()
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.blog = post
+            comment.save()
+            return redirect('post', blog_id=post.id)
+
+    return render(request, 'website/post.html', {'post': post, 'form': form, 'comments':comments})
 
 def register(request):
     if request.method == "POST":

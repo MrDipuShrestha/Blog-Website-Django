@@ -1,0 +1,51 @@
+# Byte-compiled / compiled Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+*.egg-info/
+*.egg
+
+# Django Secrets (if using .env files)
+.env
+*.env
+
+# Database files (SQLite)
+db.sqlite3
+db.sqlite3-journal
+
+# Media and Static Files (Generated)
+media/
+staticfiles/
+static/
+
+# Logs and Debug Files
+*.log
+logs/
+*.out
+
+# VS Code and JetBrains IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# MacOS and Linux system files
+.DS_Store
+*.bak
+
+# Node.js dependencies (if using)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Compiled files
+*.pyc
+*.pyo
+
+# Migrations (Optional)
+**/migrations/*.py
+!**/migrations/__init__.py
